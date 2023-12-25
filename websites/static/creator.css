@@ -1,0 +1,116 @@
+.banner4{
+    height:1250px;
+    width: 100%;
+    background-image: linear-gradient(135deg,#71b7e6,#9b59b6);
+}
+.transparent-box {
+    background-color: rgba(255, 255, 255, 0.6); /* White with 80% opacity */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    width: 50%;
+    justify-content: center;
+    text-align: center;
+    margin-left: 350px;
+    
+}
+.admin-heading {
+    text-align: center;
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.user-box{
+    width: 25%;
+    background-color:  rgba(255, 255, 255, 0.6);;
+    padding-left: 10px;
+    border-radius: 10px;
+    margin: 40px;
+    margin-top: 20px;
+    font-family: Arial;
+    box-shadow: 2px 2px 10px black;
+    display: inline-block;
+}
+
+.creator-box {
+    width: 28%;
+    background-color:  rgba(255, 255, 255, 0.6);;
+    padding-left: 8px;
+    border-radius: 10px;
+    margin: 40px;
+    margin-top: 20px;
+    font-family: Arial;
+    box-shadow: 2px 2px 10px black;
+    display: inline-block;
+}
+
+.user-box h2,
+.creator-box h2 {
+    color: blue;
+}
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 500px;
+    max-height: 700px;
+    background: #fff;
+    border-radius: 15px;
+    
+}
+.container form{
+    padding-bottom: 10px;
+
+}
+form .album-details .input-box{
+    padding: 10px;
+    font-size: 20px;
+    margin: 20px 0 12px 0;
+}
+.album-details .input-box input{
+    height: 45px;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+.album-details .input-box .details{
+    font-weight: 500;
+    margin-bottom: 5px;
+
+}
+.album-details .button{
+    height: 45px;
+}
+.album-details .button input{
+    height: 100%;
+    width: 100%;
+    outline: none;
+    color: #fff;
+    background: linear-gradient(135deg,#71b7e6,#9b59b6);
+    border-radius: 5px ;
+    border: none;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+.album-details .button input:hover{
+    background:linear-gradient(-135deg,#71b7e6,#9b59b6);
+}
+.nav-item-search{
+    width: 250px;
+    border-radius: 30px;
+    border: 2px solid#fff;
+    padding: 8px;
+}
+.nav-item-search input{
+    background: transparent;
+    border: none;
+    outline: none;
+    width: 200px;
+}
+.icon-search{
+    color: aliceblue;
+}

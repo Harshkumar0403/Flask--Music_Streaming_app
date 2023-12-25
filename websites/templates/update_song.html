@@ -1,0 +1,52 @@
+
+{% extends 'layouts.html' %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='creator.css') }}">
+<div class="banner4">
+  <div class="banner4">
+    <nav class="navbar">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <img src="{{ url_for('static', filename='favion.png') }}" alt="" width="30" height="30" class="d-inline-block align-text-top">
+            <div class="par1">
+                Heal
+            </div>
+          </a>
+          <ul class="nav justify-content-end">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page"  style="color: #fff;" href="{{url_for('views.logout')}}">Log out</a>
+            </li>
+            <li class="nav-item">
+              {% if user.role == 'creator' %}
+                <a class="nav-link" style="color: #fff;" href="{{url_for('views.creator')}}">back</a>
+              {% else %}
+              <a class="nav-link"  style="color: #fff;" href="{{url_for('views.dashboard')}}">back</a>
+              {% endif %}
+            </li>
+          </ul>
+        </div>
+      </nav>
+  <h1 style="text-align: center;">Update Song</h1>
+  <div class="transparent-box">
+    <form method="post" action="{{ url_for('views.update_song', song_id=song.id) }}" enctype="multipart/form-data" >
+      <div class="album-details">
+        <div class="input-box">
+            <span class="details">Name</span>
+            <input type="text" id="name" name="name" value="{{song.name}}" required>
+        </div>
+        <div class="input-box">
+            <span class="details">Lyrics</span>
+            <input type="text" id="lyrics" name="lyrics"  value="{{song.lyrics}}" required>
+        </div>
+        <div class="input-box">
+            <span class="details">Duration</span>
+            <input type="text" id="duration" name="duration" value="{{song.duration}}" required>
+        </div>
+        <div class="button">
+            <input type="submit" value="Update">
+        </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

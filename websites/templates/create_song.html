@@ -1,0 +1,73 @@
+{% extends 'layouts.html' %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='creator.css') }}">
+<div class="banner4">
+    <nav class="navbar">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <img src="{{ url_for('static', filename='favion.png') }}" alt="" width="30" height="30" class="d-inline-block align-text-top">
+            <div class="par1">
+                Heal
+            </div>
+          </a>
+          <ul style="text-decoration: none;">
+            <li>
+                {% if user.role == 'creator' %}
+                  <a class="nav-link" style="color: #fff;" href="{{url_for('views.creator')}}">back</a>
+                {% else %}
+                <a class="nav-link"  style="color: #fff;" href="{{url_for('views.dashboard')}}">back</a>
+                {% endif %}
+              </li>
+            </ul>
+
+        </div>
+    </nav>
+    <div class="title" style="text-align: center;color: aliceblue;font-size: 30px;">Add Songs</div>
+    <div class="container" style="padding-bottom: 10px;">
+        <form action="{{ url_for('views.create_song',album_id=album.id) }}" method="post" enctype="multipart/form-data">
+                <div class="album-details">
+                    <div class="input-box" style="font-size: 12px;">
+                        <span class="details">Name</span>
+                        <input type="text" id="song_name" name="song_name"  placeholder="Enter Song Name" required>
+                    </div>
+                    <div class="input-box" style="font-size: 12px;">
+                        <span class="details">Lyrics</span>
+                        <input type="textarea" id="lyrics" name="lyrics"  placeholder="Enter Lyrics" required>
+                    </div>
+                    <div class="input-box" style="font-size: 12px;">
+                        <span class="details">Duration</span>
+                        <input type="text" id="duration" name="duration"  placeholder="Enter Duration" required>
+                    </div>
+                    <div class="input-box" style="font-size: 12px;">
+                        <span class="details">Upload Audio File</span>
+                        <input type="file" id="audio" name="audio" accept=".mp3, .wav, .ogg">
+                    </div>
+                    <div class="input-box" style="font-size: 12px;">
+                        <span class="details">Rating</span>
+                        <select id="rating" name="rating" style="background-color: aqua;" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            
+                          </select>
+                    </div>
+                    <div class="input-box" style="font-size: 12px;">
+                        <span class="details">Song will be added to {{album.name}}</span>
+                    </div>
+                    <div class="button" style="font-size: 12px;">
+                        <input type="submit" value="Add">
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

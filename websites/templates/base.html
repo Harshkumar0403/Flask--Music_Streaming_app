@@ -1,0 +1,18 @@
+{% extends 'layouts.html' %}
+{% block content %}
+<div class="banner">
+    <div class="content">
+        <h1> Connect On <span> Heal </span></h1>
+        <p>
+            Discover Stream and Share a constantly expanding<br>
+            mix of music from emerging major artists around the<br>
+            world.
+        </p>
+        <button  type="submit" class ="cn"><a href="{{url_for('views.signin')}}">Sign up</a></button>
+        <button  type="submit" class ="cn"><a href="{{url_for('views.login')}}">Log in</a></button>
+    </div>
+</div>
+
+
+<script src="{{url_for('static',filename='index.js')}}"></script>
+{% endblock content %}

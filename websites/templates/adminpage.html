@@ -1,0 +1,94 @@
+{% extends 'layouts.html' %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='creator.css') }}">
+<div class="banner3">
+    <nav class="navbar">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <img src="{{ url_for('static', filename='favion.png') }}" alt="" width="30" height="30" class="d-inline-block align-text-top">
+            <div class="par1">
+                Heal
+            </div>
+          </a>
+          <ul class="nav justify-content-end">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{{url_for('views.logout')}}">Log out</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{{url_for('views.dashboard')}}">Home</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+<h1 class="admin-heading">Admin Page</h1>
+
+<div class="user-box">
+  <h2>Normal Users</h2>
+  <ul>
+    {% for user in users %}
+        <form action="{{ url_for('views.remove_user', user_id=user.id) }}" method="post" class="remove-form">
+          {{ user.username }} - {{ user.email }}
+          <input type="submit" style ="background-color: aqua;border-radius: 10px;"value="Remove" onclick="return confirm('Are you sure?')">
+        </form>
+    {% endfor %}
+  </ul>
+</div>
+
+<div class="creator-box">
+  <h2>Creators</h2>
+  <ul>
+    {% for creator in creators %}
+        <form action="{{ url_for('views.remove_creator', creator_id=creator.id) }}" method="post" class="remove-form">
+          {{ creator.username }} - {{ creator.email }}
+          <input type="submit" style ="background-color:aqua;border-radius: 10px;text-align: right;" value="Remove" onclick="return confirm('Are you sure?')">
+        </form>
+    {% endfor %}
+  </ul>
+</div>
+<div class="creator-box">
+  <h2>Albums</h2>
+  <ul>
+    {% for album in albums %}
+        <form action="{{ url_for('views.remove_album', album_id=album.id) }}" method="post" class="remove-form">
+          <strong>{{ album.name }}</strong> - {{ album.genre }}
+          <input type="submit" style ="background-color: aqua; border-radius: 10px;" value="Remove" onclick="return confirm('Are you sure?')">
+        </form>
+    {% endfor %}
+  </ul>
+</div>
+<div class="creator-box">
+  <h2> Number Songs</h2>
+        <strong style="align-items: center;">{{num_songs}}</strong>
+</div>
+<div class="creator-box">
+  <h2>Trend</h2>
+  <table style="border-collapse: collapse;">
+    <thead>
+      <tr>
+          <th style="border: 1px solid #0f0101;
+          text-align: left;
+          padding: 8px;">Genre</th>
+          <th style="border: 1px solid #0f0101;
+          text-align: left;
+          padding: 8px;">Avg. Rating</th>
+      </tr>
+  </thead>
+  <tbody>
+    {% for item in genre_data%}
+        <tr>
+            <td style="border: 1px solid #0f0101;
+            text-align: left;
+            padding: 8px;">{{ item.genre }}</td>
+            <td style="border: 1px solid #0f0101;
+            text-align: left;
+            padding: 8px;">{{ item.avg_rating }}</td>
+        </tr>
+    {% endfor %}
+</tbody>
+</table>
+</div>
+</div>
+
+
+
+{% endblock %}

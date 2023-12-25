@@ -1,0 +1,51 @@
+{% extends 'layouts.html' %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='creator.css') }}">
+<div class="banner4">
+  <div class="banner4">
+    <nav class="navbar">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <img src="{{ url_for('static', filename='favion.png') }}" alt="" width="30" height="30" class="d-inline-block align-text-top">
+            <div class="par1">
+                Heal
+            </div>
+          </a>
+          <ul class="nav justify-content-end">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page"  style="color: #fff;" href="{{url_for('views.logout')}}">Log out</a>
+            </li>
+            <li class="nav-item">
+              {% if user.role == 'creator' %}
+                <a class="nav-link" style="color: #fff;" href="{{url_for('views.creator')}}">back</a>
+              {% else %}
+              <a class="nav-link"  style="color: #fff;" href="{{url_for('views.dashboard')}}">back</a>
+              {% endif %}
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+  <h2 style="text-align:center;">Songs in Album {{ album.name }}</h2>
+  <div class="transparent-box">
+    {% if album.songs %}
+    <ul>
+      {% for song in album.songs %}
+        <li>
+          <strong>{{ song.name }}</strong>
+          <a href="{{ url_for('views.delete_song', song_id=song.id) }}"style="margin: 5px; border-radius:3px;text-decoration: none; background-color: rgb(221, 20, 87); color: rgb(1, 10, 19);align-items: center; font-size:20px;border: 1px solid black;"  onclick="return confirm('Are you sure?')">Delete Song</a>
+          <a href="{{ url_for('views.update_song', song_id=song.id) }}" style="margin: 5px; border-radius:3px;text-decoration: none; background-color: rgb(20, 181, 221); color: rgb(1, 10, 19);align-items: center; font-size: 20px;border: 1px solid black;">Update Song</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No songs in the album yet.</p>
+  {% endif %}
+
+
+  </div>
+    </div>
+
+  
+{% endblock %}

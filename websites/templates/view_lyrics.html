@@ -1,0 +1,61 @@
+{% extends 'layouts.html' %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='creator.css') }}">
+<div class="banner4">
+  <nav class="navbar">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="{{ url_for('static', filename='favion.png') }}" alt="" width="30" height="30" class="d-inline-block align-text-top">
+        <div class="par1">
+            Heal
+        </div>
+      </a>
+      <ul class="nav justify-content-end">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page"  style="color: #fff;" href="{{url_for('views.logout')}}">Log out</a>
+        </li>
+        <li class="nav-item">
+          {% if user.role == 'creator' %}
+            <a class="nav-link" style="color: #fff;" href="{{url_for('views.creator')}}">back</a>
+          {% else %}
+          <a class="nav-link"  style="color: #fff;" href="{{url_for('views.dashboard')}}">back</a>
+          {% endif %}
+        </li>
+      </ul>
+      </div>
+    </nav>
+  <div class="transparent-box" style="padding:10px">
+    <h1>{{ song.name }}</h1>
+    <br>
+     <strong>duration {{ song.duration }} ,  Current rating {{ song.rating }}
+     <form method="post" action="{{ url_for('views.rate_song', song_id=song.id) }}">
+      <label for="rating">Rate the Song:</label>
+      <select id="rating" name="rating" style="background-color: aqua;" required>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+      </select> <input type="submit" value="submit" style="background-color: aquamarine;">
+    </form>
+    Song added on {{ song.date_created.strftime('%Y-%m-%d') }}
+     </strong>
+    <br>
+    <br>
+    <p>{{ song.lyrics }}</p>
+    <audio controls>
+      <source src="{{song.audio }}" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+  
+  
+</div>
+  
+{% endblock %}

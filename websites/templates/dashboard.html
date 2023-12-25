@@ -1,0 +1,113 @@
+{% extends 'layouts.html' %}
+{% block content %}
+<div class="banner2">
+    <nav class="navbar">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <img src="{{ url_for('static', filename='favion.png') }}" alt="" width="30" height="30" class="d-inline-block align-text-top">
+            <div class="par1">
+                Heal
+            </div>
+          </a>
+          <ul class="nav justify-content-end">
+            <form action="{{ url_for('views.search_results') }}" method="GET">
+              <li class="nav-item-search">
+                <input type="search" name="query" placeholder="Search track">
+                <button type="submit" style="background: transparent;border: none;outline: none;"><i class="fa fa-search icon-search"></i></button>
+              </li>
+            </form>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{{url_for('views.creator')}}">Creator</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{{url_for('views.logout')}}">Log out</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('views.profile')}}">Profile</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <h1 style="text-align: center; color: #fff; font-family: 'Times New Roman'; justify-content: center; font-weight: 50px;">
+        Welcome To User's Dashboard
+      </h1>
+      <h2 style="font-family: Times New Roman; color: aliceblue; font-size: 25px;text-align: left; margin-left: 10px;">Recently Added</h2>
+        {% for album in albums %}
+        <div class="cards">
+          <div class="title">
+            <h2>{{ album.name }}</h2>
+          </div>
+        <div class="image">
+          <img width="100" height="100" src="{{album.image}}" style="width: 100%;"/>
+        </div>
+        <div class="desc">
+            <p>Genre: {{ album.genre }}</p>
+            <p>Artist: {{ album.artist }}</p>
+
+            <h3>Songs</h3>
+          <ul>
+              {% for song in album.songs %}
+              <li>
+              {{ song.name }} - {{ song.duration }}
+              <a href="{{ url_for('views.view_lyrics', song_id=song.id) }}" class="lyrics-button" style="color: blueviolet;"><i class="fa fa-play" style="float: right;"></i></a>
+              </li>
+              {% endfor %}
+          </ul>
+        </div>
+    </div>
+  {% endfor %}
+  <br>
+    <br>
+  <h2 style="font-family: Times New Roman; color: aliceblue; size: 20px;text-align: left; margin-left: 20px;">Your Favourites</h2>
+  <div class="cards">
+    <div class="title">
+      <h2>Top Songs</h2>
+    </div>
+    <div class="desc">
+      <ul>
+        {% for song in top_songs %}
+            <li>{{ song.name }} -{{ song.rating }} 
+              <a href="{{ url_for('views.view_lyrics', song_id=song.id) }}" class="lyrics-button" style="color: blueviolet;"><i class="fa fa-play" style="float: right;"></i></a>
+            </li>
+        {% endfor %}
+    </ul>
+    </div>
+  </div>
+  <div class="cards">
+    <div class ="title">
+      <h2>Your Playlist</h2>
+    </div>
+    <div class="desc">
+      <ul>
+        <form method="POST" action="{{ url_for('views.add_to_playlist') }}">
+          <select name="song_id">
+              {% for song in songs %}
+                  <option value="{{ song.id }}">{{ song.name }}</option>
+              {% endfor %}
+          </select>
+          <button type="submit" style="background-color: aquamarine; border-radius: 10px;" >Add </button>
+      </form>
+      </ul>
+      {% if user.playlist %}
+        <h4>Songs:</h4>
+        <ul>
+            {% for song in user.playlist %}
+                <li style="padding: 5px;">
+                    {{ song.name }}<a href="{{ url_for('views.view_lyrics', song_id=song.id) }}" style="color: blueviolet;padding-left: 5px;"><i class="fa fa-play"></i></a>
+                    <form method="POST" action="{{ url_for('views.remove_from_playlist') }}" style="display: inline;">
+                        <input type="hidden" name="song_id" value="{{ song.id }}">
+                        <button type="submit" style="background-color: rgb(195, 78, 191);border-radius: 10px;float: right;">Remove</button>
+                    </form>
+                </li>
+            {% endfor %} 
+        </ul>
+    {% else %}
+        <p>No Song added</p>
+    {% endif %}
+      </div>
+
+  </div>
+</div>
+
+
+{% endblock %}
